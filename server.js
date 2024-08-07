@@ -124,6 +124,43 @@ const handleAddPet = async (req, res) => {
     });
 };
 
+// Handle finding pets based on criteria (excluding breed comparison but including breed in the result)
+const handleFindPet = async (req, res) => {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+    req.on('end', async () => {
+        const { petType, age, gender, otherDogs, otherCats, smallChildren } = JSON.parse(body);
+
+        console.log(`Received find pet request: ${JSON.stringify({ petType, age, gender, otherDogs, otherCats, smallChildren })}`);
+
+        try {
+            const data = await readFile('pets.txt');
+            const pets = data.split('\n').filter(line => line).map(line => {
+                const [id, owner, type, breed, age, gender, getsAlongWithDogs, getsAlongWithCats, suitableForChildren, comments, email, phoneNumber] = line.split(':');
+                return { id, owner, type, breed, age, gender, getsAlongWithDogs, getsAlongWithCats, suitableForChildren, comments, email, phoneNumber };
+            });
+
+            const filteredPets = pets.filter(pet =>
+                (!petType || pet.type.toLowerCase() === petType.toLowerCase()) &&
+                (!age || pet.age === age) &&
+                (!gender || pet.gender.toLowerCase() === gender.toLowerCase()) &&
+                (!otherDogs || pet.getsAlongWithDogs.toLowerCase() === otherDogs.toLowerCase()) &&
+                (!otherCats || pet.getsAlongWithCats.toLowerCase() === otherCats.toLowerCase()) &&
+                (!smallChildren || pet.suitableForChildren.toLowerCase() === smallChildren.toLowerCase())
+            );
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(filteredPets));
+        } catch (error) {
+            console.error(`Error handling find pet request: ${error.message}`);
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Server error.');
+        }
+    });
+};
+
 // Handle user logout
 const handleLogout = async (req, res) => {
     console.log('Received logout request');
@@ -160,6 +197,8 @@ const server = http.createServer((req, res) => {
         handleLogin(req, res);
     } else if (req.method === 'POST' && pathname === '/add-pet') {
         handleAddPet(req, res);
+    } else if (req.method === 'POST' && pathname === '/find-pet') {
+        handleFindPet(req, res);
     } else if (req.method === 'POST' && pathname === '/logout') {
         handleLogout(req, res);
     } else if (req.method === 'GET') {
