@@ -1,3 +1,1 @@
-1:Levon Kadehjian:dog:asd:1-3:male:yes:no:yes:no:levon.kadehjian2000@gmail.com:5145506238
-2:sarin kadehjain:dog:HELLLOOOOOOO:1-3:female:yes:no:yes:NO COMMMMMMENNNTTTT:sarin@gmail.com:5415506238
-3:john smith:dog:Halskeyy:3-5:female:no:no:no:chem kider:john.smith@gmail.com:0123456789
+
