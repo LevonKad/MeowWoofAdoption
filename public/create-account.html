@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meow & Woof Adoption</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -15,7 +15,11 @@
                 </a>
                 <h1>Meow & Woof Adoption</h1>
             </div>
-            <div class="date_time" id="getCurrentDateResult"></div> 
+            <div class="date_time" id="getCurrentDateResult"></div>
+            <div class="auth-info">
+                <span id="usernameDisplay"></span>
+                <button id="authButton" class="button"></button>
+            </div>
         </header>
         <nav class="left-sidebar">
             <h2>Navigation</h2>
@@ -67,8 +71,73 @@
             </div>
         </footer>
     </div>
-    <script src="/JSfile.js"></script>
+    <script src="JSfile.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const authButton = document.getElementById('authButton');
+            const usernameDisplay = document.getElementById('usernameDisplay');
+            const createAccountLink = document.getElementById('createAccountLink');
+
+            function updateAuthButton() {
+                const loggedIn = localStorage.getItem('loggedIn');
+                const username = localStorage.getItem('username');
+                if (loggedIn) {
+                    usernameDisplay.textContent = `Logged in as: ${username}`;
+                    authButton.textContent = 'LogOut';
+                    createAccountLink.textContent = 'LogOut';
+                    createAccountLink.onclick = function(event) {
+                        event.preventDefault();
+                        fetch('/logout', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            localStorage.removeItem('loggedIn');
+                            localStorage.removeItem('username');
+                            updateAuthButton();
+                        }).catch(error => {
+                            alert('An error occurred. Please try again.');
+                        });
+                    };
+                    authButton.onclick = function() {
+                        fetch('/logout', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => response.text())
+                        .then(data => {
+                            alert(data);
+                            localStorage.removeItem('loggedIn');
+                            localStorage.removeItem('username');
+                            updateAuthButton();
+                        }).catch(error => {
+                            alert('An error occurred. Please try again.');
+                        });
+                    };
+                } else {
+                    usernameDisplay.textContent = '';
+                    authButton.textContent = 'Login';
+                    createAccountLink.textContent = 'Create Account';
+                    createAccountLink.onclick = function() {
+                        window.location.href = '/create-account.html';
+                    };
+                    authButton.onclick = function() {
+                        window.location.href = '/login.html';
+                    };
+                }
+            }
+
+            updateAuthButton();
+
+            setInterval(() => {
+                document.getElementById('getCurrentDateResult').innerHTML = new Date().toLocaleString();
+            }, 1000);
+        });
+
         document.getElementById('createAccountForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
