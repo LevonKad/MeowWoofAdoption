@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have a Pet to Give Away - Meow & Woof Adoption</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="logo-title">
+            <a href="index.html">
+                <img src="images/Logo.jpeg" alt="Meow & Woof Adoption" width="100" height="100">
+            </a>
+            <h1>Meow & Woof Adoption</h1>
+        </div>
+        <div class="date_time" id="getCurrentDateResult"></div>
+        <div class="auth-info">
+            <span id="usernameDisplay"></span>
+            <button id="authButton" class="button"></button>
+        </div>
+    </header>
+    <section class="left-sidebar">
+        <h2>Navigation</h2>
+        <ul>
+            <li><a href="index.html">Home page</a></li>
+            <li><a href="find.html">Find a Dog/Cat</a></li>
+            <li><a href="dog-care.html">Dog Care</a></li>
+            <li><a href="cat-care.html">Cat Care</a></li>
+            <li><a href="give-away.html">Have a pet to give away</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="create-account.html" id="createAccountLink">Create Account</a></li>
+        </ul>
+    </section>
+    <main class="main-content" id="main-content">
+        <h2>Have a Pet to Give Away</h2>
+        <div class="form-and-image-container">
+            <form id="giveAwayPetForm">
+                <label for="pet-type">Cat or Dog:</label>
+                <select id="pet-type" name="pet-type" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="cat">Cat</option>
+                    <option value="dog">Dog</option>
+                </select>
+                <br><br>
+
+                <label for="breed">Breed (include mix breed):</label>
+                <input type="text" id="breed" name="breed" required>
+                <br><br>
+
+                <label for="age">Age of Animal:</label>
+                <select id="age" name="age" required>
+                    <option value="" disabled selected>Select an age range</option>
+                    <option value="0-1">0-1 years</option>
+                    <option value="1-3">1-3 years</option>
+                    <option value="3-5">3-5 years</option>
+                    <option value="5+">5+ years</option>
+                </select>
+                <br><br>
+
+                <label for="gender">Animal Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select a gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <br><br>
+
+                <label>Gets along with other dogs:</label>
+                <input type="radio" id="dogs-yes" name="dogs" value="yes" required>
+                <label for="dogs-yes">Yes</label>
+                <input type="radio" id="dogs-no" name="dogs" value="no">
+                <label for="dogs-no">No</label>
+                <br><br>
+
+                <label>Gets along with other cats:</label>
+                <input type="radio" id="cats-yes" name="cats" value="yes" required>
+                <label for="cats-yes">Yes</label>
+                <input type="radio" id="cats-no" name="cats" value="no">
+                <label for="cats-no">No</label>
+                <br><br>
+
+                <label>Suitable for a family with small children:</label>
+                <input type="radio" id="children-yes" name="children" value="yes" required>
+                <label for="children-yes">Yes</label>
+                <input type="radio" id="children-no" name="children" value="no">
+                <label for="children-no">No</label>
+                <br><br>
+
+                <label for="comments">Comments:</label>
+                <br>    
+                <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Brag about the animal you are putting up for adoption"></textarea>
+                <br><br>
+
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+                <br><br>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+                <br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+
+                <label for="phone-number">Phone number:</label>
+                <input type="tel" id="phone-number" name="phone-number" required>
+                <br><br>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Clear</button>
+                <div id="error-message" style="color: red; margin-top: 10px;"></div>
+            </form>
+            <div class="form-image">
+                <img src="images/cat&dog3.jpg" alt="Pet Adoption" class="responsive-img" height="400">
+                <div class="centered-link">
+                    <a href="https://www.vecteezy.com/photo/29556643-portrait-dog-with-cat-isolated-on-white-background-generative-ai">Cat and Dog 3</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <h3 style="font-family: 'Lasiver Regular', sans-serif;">FOLLOW US</h3>
+        <h3>@MEOW_WOOF_ADOPTION</h3>
+        <p><a href="privacy.html" style="color: white; text-decoration: underline;">Privacy</a></p>
+        <p style="margin-top: 20px;"><a href="contact.html" style="color: white; text-decoration: underline;">Contact Us</a></p>
+        <br>
+
+        <div class="contact-hours">
+            <div class="contact-us">
+                <h3>ADDRESS</h3>
+                <p>52XX STREET</p>
+                <p>Montreal, Quebec</p>
+                <p>H1A XXX</p>
+                <p>514-XXX-XXXX</p>
+            </div>
+            <div class="hours-of-operation">
+                <h3>HOURS OF OPERATION</h3>
+                <p>Monday to Friday: 3 p.m. to 8 p.m.</p>
+                <p>Saturday and Sunday: 11 a.m. to 6 p.m.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="JSfile.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const authButton = document.getElementById('authButton');
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const createAccountLink = document.getElementById('createAccountLink');
+
+        function updateAuthButton() {
+            const loggedIn = localStorage.getItem('loggedIn');
+            const username = localStorage.getItem('username');
+            if (loggedIn) {
+                usernameDisplay.textContent = `Logged in as: ${username}`;
+                authButton.textContent = 'LogOut';
+                createAccountLink.textContent = 'LogOut';
+                createAccountLink.onclick = function(event) {
+                    event.preventDefault();
+                    fetch('/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        localStorage.removeItem('loggedIn');
+                        localStorage.removeItem('username');
+                        updateAuthButton();
+                    }).catch(error => {
+                        alert('An error occurred. Please try again.');
+                    });
+                };
+                authButton.onclick = function() {
+                    fetch('/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        localStorage.removeItem('loggedIn');
+                        localStorage.removeItem('username');
+                        updateAuthButton();
+                    }).catch(error => {
+                        alert('An error occurred. Please try again.');
+                    });
+                };
+            } else {
+                usernameDisplay.textContent = '';
+                authButton.textContent = 'Login';
+                createAccountLink.textContent = 'Create Account';
+                createAccountLink.onclick = function() {
+                    window.location.href = '/create-account.html';
+                };
+                authButton.onclick = function() {
+                    window.location.href = '/login.html';
+                };
+            }
+        }
+
+        updateAuthButton();
+
+        setInterval(() => {
+            document.getElementById('getCurrentDateResult').innerHTML = new Date().toLocaleString();
+        }, 1000);
+    });
+
+    document.getElementById('giveAwayPetForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            owner: `${document.getElementById('first-name').value} ${document.getElementById('last-name').value}`,
+            type: document.getElementById('pet-type').value,
+            breed: document.getElementById('breed').value,
+            age: document.getElementById('age').value,
+            gender: document.getElementById('gender').value,
+            getsAlongWithDogs: document.querySelector('input[name="dogs"]:checked').value,
+            getsAlongWithCats: document.querySelector('input[name="cats"]:checked').value,
+            suitableForChildren: document.querySelector('input[name="children"]:checked').value,
+            comments: document.getElementById('comments').value,
+            email: document.getElementById('email').value,
+            phoneNumber: document.getElementById('phone-number').value
+        };
+
+        console.log('Submitting form with data:', formData);
+        
+        fetch('/add-pet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then(response => response.text())
+        .then(data => {
+            console.log('Server response:', data);
+            alert(data);
+        })
+        .catch(error => {
+            console.error('Error during form submission:', error);
+            alert('An error occurred while submitting the form. Please try again.');
+        });
+    });
+</script>
+</body>
+</html>
