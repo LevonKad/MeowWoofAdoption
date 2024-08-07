@@ -45,7 +45,7 @@
                 </select><br><br>
 
                 <label for="breed">Breed:</label>
-                <input type="text" id="breed" name="breed" placeholder="Doesn't Matter" required><br><br>
+                <input type="text" id="breed" name="breed" placeholder="Doesn't Matter"><br><br>
 
                 <label for="age">Preferred Age:</label>
                 <select id="age" name="age" required>
@@ -95,6 +95,7 @@
                 </div>
             </div>
         </div>
+        <div id="results"></div>
     </main>
     <footer class="footer">
         <h3 style="font-family: 'Lasiver Regular', sans-serif;">FOLLOW US</h3>
@@ -183,6 +184,56 @@
         setInterval(() => {
             document.getElementById('getCurrentDateResult').innerHTML = new Date().toLocaleString();
         }, 1000);
+
+        // Handle find pet form submission
+        document.getElementById('findPetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                petType: document.getElementById('petType').value,
+                age: document.getElementById('age').value,
+                gender: document.getElementById('gender').value,
+                otherDogs: document.getElementById('otherDogs').value,
+                otherCats: document.getElementById('otherCats').value,
+                smallChildren: document.getElementById('smallChildren').value
+            };
+
+            fetch('/find-pet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }).then(response => response.json())
+            .then(data => {
+                const resultsContainer = document.getElementById('results');
+                resultsContainer.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(pet => {
+                        const petDiv = document.createElement('div');
+                        petDiv.className = 'pet-result';
+                        petDiv.innerHTML = `
+                            <p>Owner: ${pet.owner}</p>
+                            <p>Type: ${pet.type}</p>
+                            <p>Breed: ${pet.breed}</p>
+                            <p>Age: ${pet.age}</p>
+                            <p>Gender: ${pet.gender}</p>
+                            <p>Gets along with dogs: ${pet.getsAlongWithDogs}</p>
+                            <p>Gets along with cats: ${pet.getsAlongWithCats}</p>
+                            <p>Suitable for children: ${pet.suitableForChildren}</p>
+                            <p>Comments: ${pet.comments}</p>
+                            <p>Email: ${pet.email}</p>
+                            <p>Phone: ${pet.phoneNumber}</p>
+                        `;
+                        resultsContainer.appendChild(petDiv);
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<p>No matching pets found.</p>';
+                }
+            }).catch(error => {
+                alert('An error occurred while fetching pet data. Please try again.');
+            });
+        });
     });
 </script>
 </body>
